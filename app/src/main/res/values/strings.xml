@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FuckHyper</string>
+    <string name="framework_disconnected">模块未激活</string>
+    <string name="framework_disconnected_summary">LSPosed Service 未连接，请检查模块启用与框架状态</string>
+    <string name="framework_connected">模块已激活</string>
+    <string name="framework_connected_summary">Framework: %1$s</string>
+    <string name="framework_connected_details">Framework: %1$s\nAPI: %2$s  Version: %3$s</string>
+    <string name="framework_connected_fallback">LSPosed Service 已连接</string>
+    <string name="framework_error_summary">无法读取框架信息</string>
+    <string name="framework_api_required">需要支持 API 102 的框架</string>
+</resources>

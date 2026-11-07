@@ -1,0 +1,35 @@
+/*
+ * CheckCircleOutline and ErrorOutline paths are derived from Material Design icons.
+ * Copyright 2025 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package moe.fuck.hyperos.ui
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import moe.fuck.hyperos.R
+import top.yukonga.miuix.kmp.basic.Icon
+
+@Composable
+internal fun StatusIcon(active: Boolean, tint: Color, modifier: Modifier = Modifier) {
+    Icon(
+        painter = painterResource(if (active) R.drawable.lsp_module_active else R.drawable.lsp_module_inactive),
+        contentDescription = null,
+        tint = tint,
+        modifier = modifier,
+    )
+}

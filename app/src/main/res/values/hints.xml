@@ -1,0 +1,4 @@
+<resources>
+    <color name="hint_background">#1A3482FF</color>
+    <color name="hint_foreground">#FF3482FF</color>
+</resources>

@@ -1,0 +1,73 @@
+package moe.fuck.hyperos
+
+import android.app.Application
+import io.github.libxposed.service.XposedService
+import io.github.libxposed.service.XposedServiceHelper
+import java.util.concurrent.CopyOnWriteArraySet
+import kotlin.concurrent.Volatile
+
+class App : Application(), XposedServiceHelper.OnServiceListener {
+    private val report = ModuleLog.reporter("XiaoAiModule")
+    private val loggingPreferences = LoggingPreferences(report)
+    companion object {
+        @Volatile
+        var mService: XposedService? = null
+            private set
+        private val serviceStateListeners =
+            CopyOnWriteArraySet<ServiceStateListener>()
+
+        private fun dispatchServiceState(
+            listener: ServiceStateListener,
+            service: XposedService?
+        ) {
+            if (serviceStateListeners.contains(listener)) {
+                listener.onServiceStateChanged(service)
+            }
+        }
+
+        fun addServiceStateListener(
+            listener: ServiceStateListener,
+            notifyImmediately: Boolean
+        ) {
+            serviceStateListeners.add(listener)
+            if (notifyImmediately) {
+                dispatchServiceState(listener, mService)
+            }
+        }
+
+        fun removeServiceStateListener(listener: ServiceStateListener) {
+            serviceStateListeners.remove(listener)
+        }
+    }
+
+    private fun notifyServiceStateChanged(service: XposedService?) {
+        for (listener in serviceStateListeners) {
+            dispatchServiceState(listener, service)
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        XposedServiceHelper.registerListener(this)
+    }
+
+    interface ServiceStateListener {
+        fun onServiceStateChanged(service: XposedService?)
+    }
+
+    override fun onServiceBind(service: XposedService) {
+        try {
+            loggingPreferences.bind(if (service.apiVersion >= 102) service.getRemotePreferences(ModuleLog.PREFERENCES) else null)
+        } catch (error: Exception) {
+            report.error("LOG_CONFIG_UNAVAILABLE ${error.javaClass.simpleName}")
+        }
+        mService = service
+        notifyServiceStateChanged(mService)
+    }
+
+    override fun onServiceDied(service: XposedService) {
+        loggingPreferences.bind(null)
+        mService = null
+        notifyServiceStateChanged(mService)
+    }
+}

@@ -1,0 +1,32 @@
+[versions]
+agp = "9.2.1"
+xposed-api = "102.0.0"
+xposed-service = "102.0.0"
+autofill = "1.1.0"
+junit = "4.13.2"
+dexkit = "2.3.0"
+kotlin = "2.4.20"
+compose = "1.12.0"
+activity = "1.13.0"
+miuix = "0.9.4"
+robolectric = "4.16.1"
+compose-test = "1.12.0"
+
+[plugins]
+agp-app = { id = "com.android.application", version.ref = "agp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+[libraries]
+libxposed-api = { group = "io.github.libxposed", name = "api", version.ref = "xposed-api" }
+libxposed-service = { group = "io.github.libxposed", name = "service", version.ref = "xposed-service" }
+androidx-autofill = { group = "androidx.autofill", name = "autofill", version.ref = "autofill" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+dexkit = { group = "org.luckypray", name = "dexkit", version.ref = "dexkit" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "compose" }
+compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "compose" }
+miuix-ui = { module = "top.yukonga.miuix.kmp:miuix-ui-android", version.ref = "miuix" }
+miuix-preference = { module = "top.yukonga.miuix.kmp:miuix-preference-android", version.ref = "miuix" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+compose-test-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-test" }
+compose-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose-test" }

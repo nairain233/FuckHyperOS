@@ -1,0 +1,4 @@
+<resources>
+    <!-- 启动窗口与 Miuix 默认浅色页面保持一致，避免首帧闪白。 -->
+    <color name="app_window_background">#F7F7F7</color>
+</resources>
